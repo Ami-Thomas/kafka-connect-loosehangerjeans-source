@@ -97,6 +97,7 @@ public class DatagenHistoryGenerator {
         addOnlineOrderRecords(historicalRecords, config);
         addOrderAndCancellationRecords(historicalRecords, config);
         addReturnsRecords(historicalRecords, config);
+        addAbandonedShoppingCartRecords(historicalRecords, config);
 
         Collections.sort(historicalRecords, (r1, r2) -> {
             return Math.toIntExact(r1.timestamp() - r2.timestamp());
@@ -154,26 +155,16 @@ public class DatagenHistoryGenerator {
         }
     }
 
-    private void addOnlineOrderRecords(List<SourceRecord> historicalRecords, AbstractConfig config) {
-        log.debug("generating historical online order records");
-        final String ONLINEORDERS_TOPIC = config.getString(DatagenSourceConfig.CONFIG_TOPICNAME_ONLINEORDERS);
-        final String OUTOFSTOCK_TOPIC = config.getString(DatagenSourceConfig.CONFIG_TOPICNAME_OUTOFSTOCKS);
+    private void addAbandonedShoppingCartRecords(List<SourceRecord> historicalRecords, AbstractConfig config) {
+        log.debug("generating historical abandoned shopping cart records");
+        final String TOPIC = config.getString(DatagenSourceConfig.CONFIG_TOPICNAME_ABANDONEDSHOPPINGCARTS);
 
         OnlineOrderGenerator onlineOrderGenerator = new OnlineOrderGenerator(config);
         OutOfStockGenerator outOfStockGenerator = new OutOfStockGenerator(config);
 
         for (OnlineOrder order : onlineOrderGenerator.generateHistory()) {
-            SourceRecord orderRecord = order.createSourceRecord(ONLINEORDERS_TOPIC);
+            SourceRecord orderRecord = order.createSourceRecord(TOPIC);
             historicalRecords.add(orderRecord);
-
-            if (onlineOrderGenerator.shouldGenerateOutOfStockEvent()) {
-                SourceRecord outOfStockRecord = outOfStockGenerator.generate(order).createSourceRecord(OUTOFSTOCK_TOPIC);
-                historicalRecords.add(outOfStockRecord);
-
-                if (outOfStockGenerator.shouldDuplicate()) {
-                    historicalRecords.add(outOfStockRecord);
-                }
-            }
         }
     }
 
@@ -251,6 +242,29 @@ public class DatagenHistoryGenerator {
         for (ProductReview review : productReviewGenerator.generateHistory()) {
             SourceRecord reviewRecord = review.createSourceRecord(REVIEW_TOPIC);
             historicalRecords.add(reviewRecord);
+        }
+    }
+
+    private void addOnlineOrderRecords(List<SourceRecord> historicalRecords, AbstractConfig config) {
+        log.debug("generating historical online order records");
+        final String ONLINEORDERS_TOPIC = config.getString(DatagenSourceConfig.CONFIG_TOPICNAME_ONLINEORDERS);
+        final String OUTOFSTOCK_TOPIC = config.getString(DatagenSourceConfig.CONFIG_TOPICNAME_OUTOFSTOCKS);
+
+        OnlineOrderGenerator onlineOrderGenerator = new OnlineOrderGenerator(config);
+        OutOfStockGenerator outOfStockGenerator = new OutOfStockGenerator(config);
+
+        for (OnlineOrder order : onlineOrderGenerator.generateHistory()) {
+            SourceRecord orderRecord = order.createSourceRecord(ONLINEORDERS_TOPIC);
+            historicalRecords.add(orderRecord);
+
+            if (onlineOrderGenerator.shouldGenerateOutOfStockEvent()) {
+                SourceRecord outOfStockRecord = outOfStockGenerator.generate(order).createSourceRecord(OUTOFSTOCK_TOPIC);
+                historicalRecords.add(outOfStockRecord);
+
+                if (outOfStockGenerator.shouldDuplicate()) {
+                    historicalRecords.add(outOfStockRecord);
+                }
+            }
         }
     }
 
