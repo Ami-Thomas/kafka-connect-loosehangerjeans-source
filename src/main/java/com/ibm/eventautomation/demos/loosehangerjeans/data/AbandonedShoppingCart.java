@@ -25,6 +25,7 @@ import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Represents an event for an abandoned shopping cart.
@@ -54,7 +55,7 @@ public class AbandonedShoppingCart extends LoosehangerData {
             .version(1)
             .field("cartId",      Schema.STRING_SCHEMA)
             .field("customer",    OnlineCustomer.SCHEMA)
-            .field("products",    SchemaBuilder.array(Schema.STRING_SCHEMA).build())
+            .field("products",    SchemaBuilder.array(Product.SCHEMA).build())
             .field("abandonTime", Schema.STRING_SCHEMA)
             .build();
 
@@ -113,7 +114,7 @@ public class AbandonedShoppingCart extends LoosehangerData {
         Struct struct = new Struct(SCHEMA);
         struct.put(SCHEMA.field("cartId"),      cartId);
         struct.put(SCHEMA.field("customer"),    customer.toStruct());
-        struct.put(SCHEMA.field("products"),    products);
+        struct.put(SCHEMA.field("products"),    products.stream().map(Product::toStruct).collect(Collectors.toList()));
         struct.put(SCHEMA.field("abandonTime"), abandonTime);
         return struct;
     }
