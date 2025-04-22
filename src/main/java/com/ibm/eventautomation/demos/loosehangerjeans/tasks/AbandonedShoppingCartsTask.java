@@ -53,7 +53,7 @@ public class AbandonedShoppingCartsTask extends TimerTask {
         this.abandonedShoppingCartGenerator = new AbandonedShoppingCartGenerator(config);
         this.queue = queue;
         this.timer = generateTimer;
-        this.abandonedCartTopicName = config.getString(DatagenSourceConfig.CONFIG_TOPICNAME_ONLINEORDERS);
+        this.abandonedCartTopicName = config.getString(DatagenSourceConfig.CONFIG_TOPICNAME_ABANDONEDSHOPPINGCARTS);
     }
 
     @Override

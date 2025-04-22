@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import com.ibm.eventautomation.demos.loosehangerjeans.data.AbandonedShoppingCart;
 import org.apache.kafka.common.config.AbstractConfig;
 import org.apache.kafka.connect.source.SourceRecord;
 import org.apache.kafka.connect.source.SourceTaskContext;
@@ -266,7 +267,8 @@ public class DatagenHistoryGenerator {
             LoosehangerData.partition(ProductReview.PARTITION),
             LoosehangerData.partition(ReturnRequest.PARTITION),
             LoosehangerData.partition(SensorReading.PARTITION),
-            LoosehangerData.partition(StockMovement.PARTITION)
+            LoosehangerData.partition(StockMovement.PARTITION),
+            LoosehangerData.partition(AbandonedShoppingCart.PARTITION)
         );
     }
 

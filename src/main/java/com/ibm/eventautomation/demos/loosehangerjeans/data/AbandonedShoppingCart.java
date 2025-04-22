@@ -111,10 +111,10 @@ public class AbandonedShoppingCart extends LoosehangerData {
     @Override
     protected Struct getValue() {
         Struct struct = new Struct(SCHEMA);
-        struct.put(SCHEMA.field("id"),          cartId);
+        struct.put(SCHEMA.field("cartId"),      cartId);
         struct.put(SCHEMA.field("customer"),    customer.toStruct());
         struct.put(SCHEMA.field("products"),    products);
-        struct.put(SCHEMA.field("abandonTime"),   abandonTime);
+        struct.put(SCHEMA.field("abandonTime"), abandonTime);
         return struct;
     }
 
