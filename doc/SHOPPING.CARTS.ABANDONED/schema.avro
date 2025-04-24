@@ -44,45 +44,10 @@
     },
     {
       "name": "products",
-      "doc": "Products that are abandoned in the shopping cart",
+      "doc": "Descriptions of the abandoned shopping cart products",
       "type": {
         "type": "array",
-        "items": {
-          "type": "record",
-          "name": "Product",
-          "fields": [
-            {
-              "name": "product",
-              "doc": "Product that is returned",
-              "type": {
-                "type": "record",
-                "name": "Product",
-                "fields": [
-                  {
-                    "name": "name",
-                    "type": "string",
-                    "doc": "Name of the abandoned cart product"
-                  },
-                  {
-                    "name": "size",
-                    "type": "string",
-                    "doc": "Size of the abandoned cart product"
-                  },
-                  {
-                    "name": "style",
-                    "type": "string",
-                    "doc": "Style of the abandoned cart product"
-                  },
-                  {
-                    "name": "material",
-                    "type": "string",
-                    "doc": "Material of the abandoned cart product"
-                  }
-                ]
-              }
-            }
-          ]
-        }
+        "items": "string"
       }
     },
     {

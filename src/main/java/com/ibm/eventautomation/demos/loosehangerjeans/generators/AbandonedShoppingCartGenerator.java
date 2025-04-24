@@ -19,7 +19,6 @@ package com.ibm.eventautomation.demos.loosehangerjeans.generators;
 import com.ibm.eventautomation.demos.loosehangerjeans.DatagenSourceConfig;
 import com.ibm.eventautomation.demos.loosehangerjeans.data.AbandonedShoppingCart;
 import com.ibm.eventautomation.demos.loosehangerjeans.data.OnlineCustomer;
-import com.ibm.eventautomation.demos.loosehangerjeans.data.Product;
 import com.ibm.eventautomation.demos.loosehangerjeans.utils.Generators;
 import org.apache.kafka.common.config.AbstractConfig;
 
@@ -67,10 +66,9 @@ public class AbandonedShoppingCartGenerator extends Generator<AbandonedShoppingC
         OnlineCustomer customer = OnlineCustomer.create(faker, minEmails, maxEmails);
         // Generate some products randomly.
         int productCount = Generators.randomInt(minProducts, maxProducts);
-        List<Product> cartProducts = new ArrayList<>();
+        List<String> cartProducts = new ArrayList<>();
         for (int i = 0; i < productCount; i++) {
-            Product product = productGenerator.generate();
-            cartProducts.add(product);
+            cartProducts.add(productGenerator.generate().getShortDescription());
         }
 
         return new AbandonedShoppingCart(formatTimestamp(timestamp), customer, cartProducts, timestamp);

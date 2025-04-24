@@ -8,12 +8,8 @@
     ]
   },
   "products": [
-    {
-      "size": "L",
-      "material": "Khaki",
-      "style": "Cargo",
-      "name": "Jeans"
-    }
+    "Classic Low-rise Jeans",
+    "Retro Crochet Jeans"
   ],
   "abandonedtime": "2024-03-29T17:54:03.022Z"
 }
