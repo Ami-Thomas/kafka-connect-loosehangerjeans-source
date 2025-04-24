@@ -1,0 +1,94 @@
+{
+  "namespace": "com.loosehangerjeans",
+  "type": "record",
+  "name": "AbandonedShoppingCart",
+  "fields": [
+    {
+      "name": "id",
+      "doc": "Unique ID for the abandoned shopping cart",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "customer",
+      "doc": "Customer who abandoned products in the shopping cart",
+      "type": {
+        "type": "record",
+        "name": "Customer",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "type": "string",
+              "logicalType": "uuid"
+            },
+            "doc": "Unique id for the customer"
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "doc": "Name of the customer"
+          },
+          {
+            "name": "emails",
+            "type": {
+              "type": "array",
+              "items": "string"
+            },
+            "doc": "Emails of the customer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "products",
+      "doc": "Products that are abandoned in the shopping cart",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "Product",
+          "fields": [
+            {
+              "name": "product",
+              "doc": "Product that is returned",
+              "type": {
+                "type": "record",
+                "name": "Product",
+                "fields": [
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "doc": "Name of the abandoned cart product"
+                  },
+                  {
+                    "name": "size",
+                    "type": "string",
+                    "doc": "Size of the abandoned cart product"
+                  },
+                  {
+                    "name": "style",
+                    "type": "string",
+                    "doc": "Style of the abandoned cart product"
+                  },
+                  {
+                    "name": "material",
+                    "type": "string",
+                    "doc": "Material of the abandoned cart product"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "abandontime",
+      "doc": "Time that the products were abandoned in the shopping cart (UTC time in ISO 8601 format)",
+      "type": "string"
+    }
+  ]
+}

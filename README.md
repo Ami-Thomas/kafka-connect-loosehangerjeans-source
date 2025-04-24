@@ -83,6 +83,7 @@ spec:
     topic.name.outofstocks: STOCK.NOSTOCK
     topic.name.returnrequests: PRODUCT.RETURNS
     topic.name.productreviews: PRODUCT.REVIEWS
+    topic.name.abandonedshoppingcarts: SHOPPING.CARTS.ABANDONED
 
     #
     # startup behavior
@@ -110,28 +111,30 @@ spec:
     # how often events should be created
     #
     # 'normal' random orders
-    timings.ms.orders: 30000              # every 30 seconds
+    timings.ms.orders: 30000                    # every 30 seconds
     # cancellations of a large order followed by a small order of the same item
-    timings.ms.falsepositives: 600000     # every 10 minutes
+    timings.ms.falsepositives: 600000           # every 10 minutes
     # repeated cancellations of a large order followed by a small order of the same item
-    timings.ms.suspiciousorders: 3600000  # every hour
+    timings.ms.suspiciousorders: 3600000        # every hour
     # stock movement events
-    timings.ms.stockmovements: 300000     # every 5 minutes
+    timings.ms.stockmovements: 300000           # every 5 minutes
     # door badge events
-    timings.ms.badgeins: 600              # sub-second
+    timings.ms.badgeins: 600                    # sub-second
     # new customer events
-    timings.ms.newcustomers: 543400       # a little over 9 minutes
+    timings.ms.newcustomers: 543400             # a little over 9 minutes
     # sensor reading events
-    timings.ms.sensorreadings: 27000      # every 27 seconds
+    timings.ms.sensorreadings: 27000            # every 27 seconds
     # sensor reading events
     #  from a single sensor that periodically generates very high and increasing readings (before returning to a normal range)
-    timings.ms.highsensorreadings: 18000  # every 18 seconds
+    timings.ms.highsensorreadings: 18000        # every 18 seconds
     # online orders
-    timings.ms.onlineorders: 30000        # every 30 seconds
+    timings.ms.onlineorders: 30000              # every 30 seconds
     # return requests
-    timings.ms.returnrequests: 300000     # every 5 minutes
+    timings.ms.returnrequests: 300000           # every 5 minutes
     # product reviews
-    timings.ms.productreviews: 60000      # every 1 minute
+    timings.ms.productreviews: 60000            # every 1 minute
+    # abandoned shopping carts
+    timings.ms.abandonedshoppingcarts: 300000   # every 5 minutes
 
     #
     # how much of a delay to introduce when producing events
@@ -151,25 +154,27 @@ spec:
     #    the message payload)
     #
     # orders
-    eventdelays.orders.secs.max: 0              # payload time matches event time by default
+    eventdelays.orders.secs.max: 0                    # payload time matches event time by default
     # cancellations
-    eventdelays.cancellations.secs.max: 0       # payload time matches event time by default
+    eventdelays.cancellations.secs.max: 0             # payload time matches event time by default
     # stock movements
-    eventdelays.stockmovements.secs.max: 0      # payload time matches event time by default
+    eventdelays.stockmovements.secs.max: 0            # payload time matches event time by default
     # door badge events
-    eventdelays.badgeins.secs.max: 180          # payload time can be up to 3 minutes (180 secs) behind event time
+    eventdelays.badgeins.secs.max: 180                # payload time can be up to 3 minutes (180 secs) behind event time
     # new customer events
-    eventdelays.newcustomers.secs.max: 0        # payload time matches event time by default
+    eventdelays.newcustomers.secs.max: 0              # payload time matches event time by default
     # sensor readings events
-    eventdelays.sensorreadings.secs.max: 300    # payload time can be up to 5 minutes (300 secs) behind event time
+    eventdelays.sensorreadings.secs.max: 300          # payload time can be up to 5 minutes (300 secs) behind event time
     # online orders
-    eventdelays.onlineorders.secs.max: 0        # payload time matches event time by default
+    eventdelays.onlineorders.secs.max: 0              # payload time matches event time by default
     # out-of-stock events
-    eventdelays.outofstocks.secs.max: 0         # payload time matches event time by default
+    eventdelays.outofstocks.secs.max: 0               # payload time matches event time by default
     # return requests
-    eventdelays.returnrequests.secs.max: 0      # payload time matches event time by default
+    eventdelays.returnrequests.secs.max: 0            # payload time matches event time by default
     # product reviews
-    eventdelays.productreviews.secs.max: 0      # payload time matches event time by default
+    eventdelays.productreviews.secs.max: 0            # payload time matches event time by default
+    # abandoned shopping carts
+    eventdelays.abandonedshoppingcarts.secs.max: 0    # payload time matches event time by default
 
     #
     # how many events should be duplicated
@@ -184,25 +189,27 @@ spec:
     #                         1.0 means all events will be duplicated
     #
     # orders
-    duplicates.orders.ratio: 0              # events not duplicated
+    duplicates.orders.ratio: 0                  # events not duplicated
     # cancellations
-    duplicates.cancellations.ratio: 0       # events not duplicated
+    duplicates.cancellations.ratio: 0           # events not duplicated
     # stock movements
-    duplicates.stockmovements.ratio: 0.1    # duplicate roughly 10% of the events
+    duplicates.stockmovements.ratio: 0.1        # duplicate roughly 10% of the events
     # door badge events
-    duplicates.badgeins.ratio: 0            # events not duplicated
+    duplicates.badgeins.ratio: 0                # events not duplicated
     # new customer events
-    duplicates.newcustomers.ratio: 0        # events not duplicated
+    duplicates.newcustomers.ratio: 0            # events not duplicated
     # sensor reading events
-    duplicates.sensorreadings.ratio: 0      # events not duplicated
+    duplicates.sensorreadings.ratio: 0          # events not duplicated
     # online orders
-    duplicates.onlineorders.ratio: 0        # events not duplicated
+    duplicates.onlineorders.ratio: 0            # events not duplicated
     # out-of-stock events
-    duplicates.outofstocks.ratio: 0         # events not duplicated
+    duplicates.outofstocks.ratio: 0             # events not duplicated
     # return requests
-    duplicates.returnrequests.ratio: 0      # events not duplicated
+    duplicates.returnrequests.ratio: 0          # events not duplicated
     # product reviews
-    duplicates.productreviews.ratio: 0      # events not duplicated
+    duplicates.productreviews.ratio: 0          # events not duplicated
+    # online orders
+    duplicates.abandonedshoppingcarts.ratio: 0  # events not duplicated
 
     #
     # product names to use in events

@@ -1,0 +1,19 @@
+{
+  "cartid": "6ccb03aa-1636-48d1-b18c-ea04457f3542",
+  "customer": {
+    "id": "5989586f-42c9-4afa-ba1e-031422f71539",
+    "name": "Shaunta Purdy",
+    "emails": [
+      "shaunta.purdy@example.com"
+    ]
+  },
+  "products": [
+    {
+      "size": "L",
+      "material": "Khaki",
+      "style": "Cargo",
+      "name": "Jeans"
+    }
+  ],
+  "abandonedtime": "2024-03-29T17:54:03.022Z"
+}

@@ -973,7 +973,7 @@ public class DatagenSourceConfig {
                     CONFIG_GROUP_TIMES, 11, Width.MEDIUM, "Product reviews delay")
         .define(CONFIG_TIMES_ABANDONEDSHOPPINGCARTS,
                     Type.INT,
-                    30_000, // 30 seconds
+                    300_000, // 5 minutes
                     Range.atLeast(500),
                     Importance.LOW,
                     "Delay, in milliseconds, between each abandoned shopping cart that should be generated.",
