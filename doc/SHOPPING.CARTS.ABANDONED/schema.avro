@@ -4,7 +4,7 @@
   "name": "AbandonedShoppingCart",
   "fields": [
     {
-      "name": "id",
+      "name": "cartid",
       "doc": "Unique ID for the abandoned shopping cart",
       "type": {
         "type": "string",
@@ -51,7 +51,7 @@
       }
     },
     {
-      "name": "abandontime",
+      "name": "abandonedtime",
       "doc": "Time that the products were abandoned in the shopping cart (UTC time in ISO 8601 format)",
       "type": "string"
     }
