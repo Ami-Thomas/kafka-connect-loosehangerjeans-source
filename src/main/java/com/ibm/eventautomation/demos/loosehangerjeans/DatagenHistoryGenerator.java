@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ibm.eventautomation.demos.loosehangerjeans.data.AbandonedShoppingCart;
+import com.ibm.eventautomation.demos.loosehangerjeans.generators.AbandonedShoppingCartGenerator;
 import org.apache.kafka.common.config.AbstractConfig;
 import org.apache.kafka.connect.source.SourceRecord;
 import org.apache.kafka.connect.source.SourceTaskContext;
@@ -159,12 +160,11 @@ public class DatagenHistoryGenerator {
         log.debug("generating historical abandoned shopping cart records");
         final String TOPIC = config.getString(DatagenSourceConfig.CONFIG_TOPICNAME_ABANDONEDSHOPPINGCARTS);
 
-        OnlineOrderGenerator onlineOrderGenerator = new OnlineOrderGenerator(config);
-        OutOfStockGenerator outOfStockGenerator = new OutOfStockGenerator(config);
+        AbandonedShoppingCartGenerator abandonedShoppingCartGenerator = new AbandonedShoppingCartGenerator(config);
 
-        for (OnlineOrder order : onlineOrderGenerator.generateHistory()) {
-            SourceRecord orderRecord = order.createSourceRecord(TOPIC);
-            historicalRecords.add(orderRecord);
+        for (AbandonedShoppingCart abandonedShoppingCart : abandonedShoppingCartGenerator.generateHistory()) {
+            SourceRecord abandonedShoppingCartRecord = abandonedShoppingCart.createSourceRecord(TOPIC);
+            historicalRecords.add(abandonedShoppingCartRecord);
         }
     }
 

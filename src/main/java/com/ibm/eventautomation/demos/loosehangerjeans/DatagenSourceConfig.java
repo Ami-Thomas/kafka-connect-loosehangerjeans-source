@@ -271,11 +271,11 @@ public class DatagenSourceConfig {
                     CONFIG_GROUP_TOPICNAMES, 10, Width.LONG, "Product reviews topic")
         .define(CONFIG_TOPICNAME_ABANDONEDSHOPPINGCARTS,
                     Type.STRING,
-                    "ABANDONED.SHOPPING.CARTS",
+                    "SHOPPING.CARTS.ABANDONED",
                     new NonEmptyString(),
                     Importance.LOW,
                     "Name of the topic to use for abandoned shopping cart events",
-                    CONFIG_GROUP_TOPICNAMES, 10, Width.LONG, "Abandoned shopping carts topic")
+                    CONFIG_GROUP_TOPICNAMES, 11, Width.LONG, "Abandoned shopping carts topic")
         //
         // how to generate locations
         //
@@ -810,7 +810,7 @@ public class DatagenSourceConfig {
                     Range.between(0, 900),  // up to 15 mins max
                     Importance.LOW,
                     "Maximum delay (in *seconds*) to produce new abandoned shopping cart events (this is the maximum difference allowed between the timestamp string in the event payload, and the Kafka message's metadata timestamp)",
-                    CONFIG_GROUP_DELAYS, 10, Width.SHORT, "Abandoned shopping cart events - max produce delay")
+                    CONFIG_GROUP_DELAYS, 11, Width.SHORT, "Abandoned shopping cart events - max produce delay")
         //
         // likelihood of producing duplicate messages
         //
@@ -890,7 +890,7 @@ public class DatagenSourceConfig {
                     Range.between(0.0, 1.0), // ratio should be between 0 (don't create duplicates) and 1 (duplicate every message)
                     Importance.LOW,
                     "Ratio of abandoned shopping cart events that should be duplicated. Must be between 0 and 1.",
-                    CONFIG_GROUP_DUPLICATES, 10, Width.SHORT, "Duplicate abandoned shopping cart events ratio")
+                    CONFIG_GROUP_DUPLICATES, 11, Width.SHORT, "Duplicate abandoned shopping cart events ratio")
         //
         // How frequently to generate messages
         //
@@ -977,7 +977,7 @@ public class DatagenSourceConfig {
                     Range.atLeast(500),
                     Importance.LOW,
                     "Delay, in milliseconds, between each abandoned shopping cart that should be generated.",
-                    CONFIG_GROUP_TIMES, 11, Width.MEDIUM, "Abandoned carts delay")
+                    CONFIG_GROUP_TIMES, 12, Width.MEDIUM, "Abandoned carts delay")
         //
         // Startup behaviour
         //

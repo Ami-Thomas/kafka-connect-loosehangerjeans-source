@@ -65,7 +65,6 @@ public class AbandonedShoppingCartGenerator extends Generator<AbandonedShoppingC
     protected AbandonedShoppingCart generateEvent(ZonedDateTime timestamp) {
         // Generate a random customer
         OnlineCustomer customer = OnlineCustomer.create(faker, minEmails, maxEmails);
-        String abandonTime = formatTimestamp(timestamp);
         // Generate some products randomly.
         int productCount = Generators.randomInt(minProducts, maxProducts);
         List<Product> cartProducts = new ArrayList<>();
@@ -74,6 +73,6 @@ public class AbandonedShoppingCartGenerator extends Generator<AbandonedShoppingC
             cartProducts.add(product);
         }
 
-        return new AbandonedShoppingCart(abandonTime, customer, cartProducts, timestamp);
+        return new AbandonedShoppingCart(formatTimestamp(timestamp), customer, cartProducts, timestamp);
     }
 }
